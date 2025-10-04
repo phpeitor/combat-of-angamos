@@ -1,6 +1,5 @@
 function initFeature() {
 	function e() {
-		
 			var e = document.getElementById("gi-body-content");
 			if (!e) return; 
 			var t = e.offsetTop,
