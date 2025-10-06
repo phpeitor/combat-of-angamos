@@ -41,9 +41,7 @@ function initFeature() {
 			delay: .35
 		})
 	}), window.addEventListener("scroll", e), i < 620 && r.setAttribute("viewBox", "0 -150 810 578");
-	var l = document.getElementsByClassName("eyes"),
-		m = document.getElementsByClassName("faceshadow"),
-		c = document.getElementsByClassName("body"),
+	var c = document.getElementsByClassName("body"),
 		d = document.getElementsByClassName("upperarm"),
 		u = document.getElementsByClassName("lowerarm"),
 		g = document.getElementsByClassName("background-cloud"),
