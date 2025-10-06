@@ -71,19 +71,6 @@ function initFeature() {
 	var T = new TimelineMax({
 		repeat: -1
 	});
-	T.set(l, {
-		scaleX: 1.2,
-		scaleY: 1.05,
-		x: -1.8
-	}).set(m, {
-		transformOrigin: "50% 0%",
-		scaleX: 1,
-		scaleY: .77
-	}).to(l, .2, {
-		opacity: 0
-	}, 3.8).to(l, .2, {
-		opacity: 1
-	});
 	var N = new TimelineMax({
 		repeat: -1,
 		yoyo: !0
