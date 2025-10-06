@@ -13,5 +13,8 @@ cd combat-of-angamos
 ```bash
 index.html
 ```
+[![Video](https://img.youtube.com/vi/nVhoIrpoeBI/0.jpg)](https://www.youtube.com/watch?v=nVhoIrpoeBI)  
+[Ver demo?v2](https://www.youtube.com/watch?v=nVhoIrpoeBI)
+
 [![Video](https://img.youtube.com/vi/PelQ_AsnAr4/0.jpg)](https://www.youtube.com/watch?v=PelQ_AsnAr4)  
-[Ver demo](https://www.youtube.com/watch?v=PelQ_AsnAr4)
+[Ver demo?v1](https://www.youtube.com/watch?v=PelQ_AsnAr4)
