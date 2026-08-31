@@ -742,7 +742,7 @@ footer .gi-footer__copyright abbr {
 
 #main-art {
 	position: absolute;
-	bottom: 0;
+	bottom: -8px;
 	left: 0;
 	z-index: 1;
 	display: block;
@@ -756,6 +756,12 @@ footer .gi-footer__copyright abbr {
 	overflow: visible;
 	transform: translateX(0);
 	preserveAspectRatio: xMidYMid meet;
+}
+
+@media (min-width: 620px) {
+	#main-art {
+		bottom: -8px;
+	}
 }
 
 @media (min-width: 414px) {
