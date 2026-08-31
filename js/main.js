@@ -216,6 +216,33 @@ function initFeature() {
 	})
 }
 
+function loadPartialTemplate(name) {
+	return fetch("./templates/fusion-app/hero-" + name + ".html")
+		.then(function(response) {
+			if (!response.ok) {
+				throw new Error("Partial not found: " + name);
+			}
+			return response.text();
+		});
+}
+
+function mountHeroPartials(app) {
+	var placeholders = app.querySelectorAll("[data-partial]");
+	var jobs = Array.prototype.map.call(placeholders, function(node) {
+		var partialName = node.getAttribute("data-partial");
+		return loadPartialTemplate(partialName)
+			.then(function(html) {
+				node.outerHTML = html;
+			})
+			.catch(function(error) {
+				console.error("No se pudo cargar el parcial " + partialName + ":", error);
+				node.innerHTML = '<div class="fusion-app-fallback">Sección no disponible.</div>';
+			});
+	});
+
+	return Promise.all(jobs);
+}
+
 function loadFusionApp() {
 	var app = document.getElementById("fusion-app");
 	if (!app || app.dataset.loaded === "true") return;
@@ -230,6 +257,9 @@ function loadFusionApp() {
 		})
 		.then(function(html) {
 			app.innerHTML = html;
+			return mountHeroPartials(app);
+		})
+		.then(function() {
 			if (typeof window.initFeature === "function") {
 				window.initFeature();
 			} else {
