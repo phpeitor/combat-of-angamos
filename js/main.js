@@ -45,7 +45,7 @@ function initFeature() {
 	}
 	window.addEventListener("scroll", e);
 	if (r && i < 620) {
-		r.setAttribute("viewBox", "0 -150 810 578");
+		r.setAttribute("viewBox", "0 0 810 520");
 	}
 	var c = document.getElementsByClassName("body"),
 		d = document.getElementsByClassName("upperarm"),
@@ -217,7 +217,8 @@ function initFeature() {
 }
 
 function loadPartialTemplate(name) {
-	return fetch("./templates/fusion-app/hero-" + name + ".html")
+	var cacheBust = "?v=" + Date.now();
+	return fetch("./templates/fusion-app/hero-" + name + ".html" + cacheBust)
 		.then(function(response) {
 			if (!response.ok) {
 				throw new Error("Partial not found: " + name);
@@ -248,7 +249,7 @@ function loadFusionApp() {
 	if (!app || app.dataset.loaded === "true") return;
 	app.dataset.loaded = "true";
 
-	fetch("./templates/fusion-app/hero-shell.html")
+	fetch("./templates/fusion-app/hero-shell.html?v=" + Date.now())
 		.then(function(response) {
 			if (!response.ok) {
 				throw new Error("Template not found");
