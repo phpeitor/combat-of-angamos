@@ -541,34 +541,35 @@ footer .gi-footer__copyright abbr {
 	position: relative;
 	top: 0;
 	width: 100%;
-	height: 450px;
-	overflow: visible;
+	height: auto;
+	aspect-ratio: 10 / 6;
+	overflow: hidden;
 	vertical-align: middle;
 	background: #98d8f5;
 	line-height: 0
 }
 
-@media (min-width: 375px) {
+@media (min-width: 620px) {
 	.gi-header__article section.gi-art__top {
-		height:550px
+		aspect-ratio: 10 / 5.5
 	}
 }
 
-@media (min-width: 620px) {
+@media (min-width: 900px) {
 	.gi-header__article section.gi-art__top {
-		height:600px
+		aspect-ratio: 10 / 5
 	}
 }
 
 @media (min-width: 1200px) {
 	.gi-header__article section.gi-art__top {
-		height:700px
+		aspect-ratio: 10 / 4.8
 	}
 }
 
 @media (min-width: 1600px) {
 	.gi-header__article section.gi-art__top {
-		height:800px
+		aspect-ratio: 10 / 4.5
 	}
 }
 

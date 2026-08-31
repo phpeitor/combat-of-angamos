@@ -45,7 +45,7 @@ function initFeature() {
 	}
 	window.addEventListener("scroll", e);
 	if (r && i < 620) {
-		r.setAttribute("viewBox", "0 0 810 520");
+		r.setAttribute("viewBox", "0 -80 810 600");
 	}
 	var c = document.getElementsByClassName("body"),
 		d = document.getElementsByClassName("upperarm"),
