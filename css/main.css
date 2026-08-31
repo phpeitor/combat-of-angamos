@@ -795,8 +795,33 @@ footer .gi-footer__copyright abbr {
 	fill: #98d8f5 !important;
 }
 
+#main-art .ground1,
+#main-art .ground2 {
+	transform-box: fill-box;
+	transform-origin: center;
+	animation: water-oscillate 7s ease-in-out infinite alternate;
+	will-change: transform;
+}
+
+#main-art .ground2 {
+	animation-duration: 9s;
+	animation-delay: 0.4s;
+}
+
 #main-art .fumesgroup {
 	filter: url("#goo")
+}
+
+@keyframes water-oscillate {
+	0% {
+		transform: translate3d(-18px, 2px, 0) scaleX(1.02) scaleY(1);
+	}
+	50% {
+		transform: translate3d(12px, -6px, 0) scaleX(1.04) scaleY(1.02);
+	}
+	100% {
+		transform: translate3d(-14px, 5px, 0) scaleX(1.03) scaleY(1.01);
+	}
 }
 
 #main-art .level1,#main-art .level2,#main-art .level3,#main-art .level6 {
