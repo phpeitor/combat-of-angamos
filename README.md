@@ -8,14 +8,6 @@ Combate de Angamos es una pequeña experiencia web inspirada en la historia nava
 
 La estructura del proyecto está pensada para ser simple, ligera y fácil de ejecutar localmente, sin dependencias complejas ni procesos de compilación.
 
-## 🧩 Stack tecnológico
-
-- HTML5
-- CSS3
-- JavaScript vanilla
-- jQuery 3.x
-- Assets estáticos y templates reutilizables
-
 ## 🏗️ Estructura del repositorio
 
 ```text
@@ -94,7 +86,3 @@ Este proyecto está diseñado como una maqueta o demo frontend. Si vas a continu
 ## 📝 Notas
 
 El proyecto funciona como una base rápida para prototipos visuales o presentaciones estáticas. Para una versión más robusta, se puede evolucionar hacia una arquitectura modular con componentes, un sistema de build y mejores prácticas de accesibilidad y rendimiento.
-
-## 👤 Autor
-
-Proyecto desarrollado por el autor del repositorio. Si lo usas como base para un producto real, se recomienda documentar apropiadamente la licencia, ownership y responsabilidades del código.
