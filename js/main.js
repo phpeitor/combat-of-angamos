@@ -1,16 +1,16 @@
 function initFeature() {
 	function e() {
-			var e = document.getElementById("gi-body-content");
-			if (!e) return; 
-			var t = e.offsetTop,
-				n = document.getElementById("gi-trigger");
-			if (!n) return;
-			var o = n.offsetTop;
-			i = n.offsetHeight,
-			r = window.innerHeight,
-			l = window.scrollY,
-			m = l + r - i,
-			c = o - i;
+		var e = document.getElementById("gi-body-content");
+		if (!e) return;
+		var t = e.offsetTop,
+			n = document.getElementById("gi-trigger");
+		if (!n) return;
+		var o = n.offsetTop;
+		i = n.offsetHeight,
+		r = window.innerHeight,
+		l = window.scrollY,
+		m = l + r - i,
+		c = o - i;
 		l >= t && m < c ? (a.classList.add("gi-header__active"), s.classList = "", s.classList.add("nav-animate", "nav-animate__partial")) : m >= c - 321 ? (s.classList = "", s.classList.add("nav-show", "nav-show__partial")) : (a.classList.remove("gi-header__active"), s.classList = "")
 	}
 
@@ -25,22 +25,28 @@ function initFeature() {
 		o = document.querySelector(".close-icon"),
 		i = window.innerWidth,
 		r = document.getElementById("main-art");
-	s.addEventListener("click", function() {
-		this.classList.contains("nav-animate__partial") ? (s.classList.toggle("nav-animate__full"), TweenMax.fromTo(o, .05, {
-			y: 0,
-			ease: Power1.easeIn
-		}, {
-			y: 40,
-			ease: Power1.easeIn
-		})) : TweenMax.fromTo(n, .05, {
-			y: 40,
-			ease: Power1.easeIn
-		}, {
-			y: 0,
-			ease: Power1.easeIn,
-			delay: .35
-		})
-	}), window.addEventListener("scroll", e), i < 620 && r.setAttribute("viewBox", "0 -150 810 578");
+	if (s) {
+		s.addEventListener("click", function() {
+			this.classList.contains("nav-animate__partial") ? (s.classList.toggle("nav-animate__full"), TweenMax.fromTo(o, .05, {
+				y: 0,
+				ease: Power1.easeIn
+			}, {
+				y: 40,
+				ease: Power1.easeIn
+			})) : TweenMax.fromTo(n, .05, {
+				y: 40,
+				ease: Power1.easeIn
+			}, {
+				y: 0,
+				ease: Power1.easeIn,
+				delay: .35
+			})
+		});
+	}
+	window.addEventListener("scroll", e);
+	if (r && i < 620) {
+		r.setAttribute("viewBox", "0 -150 810 578");
+	}
 	var c = document.getElementsByClassName("body"),
 		d = document.getElementsByClassName("upperarm"),
 		u = document.getElementsByClassName("lowerarm"),
@@ -179,18 +185,24 @@ function initFeature() {
 		yoyo: !0,
 		delay: 2
 	}, 1);
-	var q = ($("html"), $("#prompt")),
+	var q = $("#prompt"),
 		P = $("#toggle"),
 		W = $("#gi-parallax-hook");
-	FastClick.attach(document.body), W.parallax({
-		limitY: 10
-	}), setTimeout(function() {
-		"cursor" === W.data("mode") && (q.removeClass("hide"), window.innerWidth < 600 && P.addClass("hide"), q.on("click", function(e) {
-			q.addClass("hide"), window.innerWidth < 600 && setTimeout(function() {
-				P.removeClass("hide")
-			}, 1200)
-		}))
-	}, 1e3);
+	if (typeof FastClick !== "undefined") {
+		FastClick.attach(document.body);
+	}
+	if (W.length) {
+		W.parallax({
+			limitY: 10
+		});
+		setTimeout(function() {
+			"cursor" === W.data("mode") && (q.removeClass("hide"), window.innerWidth < 600 && P.addClass("hide"), q.on("click", function(e) {
+				q.addClass("hide"), window.innerWidth < 600 && setTimeout(function() {
+					P.removeClass("hide")
+				}, 1200)
+			}))
+		}, 1e3);
+	}
 	var A = function(e) {
 		"interactive" === document.readyState || "complete" === document.readyState ? e() : document.addEventListener("DOMContentLoaded", e)
 	};
@@ -203,4 +215,32 @@ function initFeature() {
 		})
 	})
 }
-initFeature();
+
+function loadFusionApp() {
+	var app = document.getElementById("fusion-app");
+	if (!app || app.dataset.loaded === "true") return;
+	app.dataset.loaded = "true";
+
+	fetch("./templates/fusion-app/hero-shell.html")
+		.then(function(response) {
+			if (!response.ok) {
+				throw new Error("Template not found");
+			}
+			return response.text();
+		})
+		.then(function(html) {
+			app.innerHTML = html;
+			if (typeof window.initFeature === "function") {
+				window.initFeature();
+			} else {
+				initFeature();
+			}
+		})
+		.catch(function(error) {
+			console.error("No se pudo cargar fusion-app:", error);
+			app.innerHTML = '<div class="fusion-app-fallback">No se pudo cargar la escena.</div>';
+		});
+}
+
+window.initFeature = initFeature;
+window.addEventListener("DOMContentLoaded", loadFusionApp);
