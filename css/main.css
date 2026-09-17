@@ -17,6 +17,17 @@ html {
 
 body {
 	margin: 0;
+	background: #98d8f5;
+	overflow-x: hidden
+}
+
+#fusion-app {
+	min-height: 100vh;
+	background: #98d8f5
+}
+
+.gi-series-nav {
+	min-height: 0
 }
 
 article,aside,footer,header,nav,section {

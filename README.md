@@ -2,7 +2,11 @@
 [![forthebadge](http://forthebadge.com/images/badges/made-with-javascript.svg)](https://www.linkedin.com/in/drphp/)
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](https://www.linkedin.com/in/drphp/)
 
-## � Descripción del proyecto
+[![Video](https://img.youtube.com/vi/nVhoIrpoeBI/0.jpg)](https://www.youtube.com/watch?v=nVhoIrpoeBI)
+
+[![Video Demo](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=nVhoIrpoeBI)
+
+## Descripción del proyecto
 
 Combate de Angamos es una pequeña experiencia web inspirada en la historia naval peruana, desarrollada como una demo interactiva con HTML, CSS y JavaScript puro. El objetivo principal es ofrecer una presentación visual atractiva, con narrativa y elementos de interacción que simulan una escena de batalla o mockup de juego.
 
@@ -76,12 +80,6 @@ Este proyecto está diseñado como una maqueta o demo frontend. Si vas a continu
 - centralizar estilos y variables de diseño;
 - mantener los assets en carpetas consistentes;
 - documentar cualquier flujo interactivo para facilitar futuras iteraciones.
-
-## 📹 Demo
-
-[![Video](https://img.youtube.com/vi/nVhoIrpoeBI/0.jpg)](https://www.youtube.com/watch?v=nVhoIrpoeBI)
-
-[Ver demo en YouTube](https://www.youtube.com/watch?v=nVhoIrpoeBI)
 
 ## 📝 Notas
 
