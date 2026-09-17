@@ -997,6 +997,74 @@ p.gi-credits {
 }
 #logo { width:120px; height:auto; border-radius:10px; display:block; position:relative; z-index:1; }
 
+.logo-lightbox {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 24px;
+	background: rgba(8, 18, 32, .86);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity .28s ease, visibility 0s linear .28s;
+}
+
+.logo-lightbox--open {
+	opacity: 1;
+	visibility: visible;
+	transition-delay: 0s;
+}
+
+.logo-lightbox--closing {
+	opacity: 0;
+	visibility: visible;
+}
+
+.logo-lightbox__img {
+	max-width: min(90vw, 720px);
+	max-height: 86vh;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	border-radius: 14px;
+	box-shadow: 0 18px 60px rgba(0, 0, 0, .45);
+	transform: translate(var(--lbx), var(--lby)) scale(.35);
+	transition: transform .42s cubic-bezier(.2, .8, .2, 1);
+}
+
+.logo-lightbox--open .logo-lightbox__img {
+	transform: translate(0, 0) scale(1);
+}
+
+.logo-lightbox__close {
+	position: absolute;
+	top: 18px;
+	right: 18px;
+	width: 44px;
+	height: 44px;
+	border: 0;
+	border-radius: 50%;
+	color: #fff;
+	background: rgba(255, 255, 255, .16);
+	font-size: 32px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.logo-lightbox__close:hover,
+.logo-lightbox__close:focus-visible {
+	background: rgba(255, 255, 255, .28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.logo-lightbox,
+	.logo-lightbox__img {
+		transition: none;
+	}
+}
+
 .sparks { 
 	position:absolute; inset:-13px; overflow:visible; pointer-events:none; z-index:2; inset: calc(-5px * var(--spark-k));     
   	transform: scale(var(--spark-k)); transform-origin: 100% 0%; 

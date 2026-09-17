@@ -289,7 +289,10 @@ function initFeature() {
 		openImageLightbox(logoImg.src, "Logo Fiestas Patrias Per\u00fa", logoEl);
 	}
 
-	logoEl.addEventListener("click", openLogo);
+	logoEl.addEventListener("click", function(e) {
+		e.preventDefault();
+		openLogo();
+	});
 	logoEl.addEventListener("keydown", function(e) {
 		if (e.key === "Enter" || e.key === " ") {
 			e.preventDefault();
