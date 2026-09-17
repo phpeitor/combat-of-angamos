@@ -26,38 +26,50 @@ body {
 	background: #98d8f5
 }
 
-.gi-series-nav {
-	min-height: 0
-}
+.sparks {
+	position: absolute;
+	inset: calc(-5px * var(--spark-k));
+	overflow: visible;
+	pointer-events: none;
+	z-index: 2;
+	transform: scale(var(--spark-k));
+	transform-origin: 100% 0%;
 
 article,aside,footer,header,nav,section {
-	display: block
-}
-
-h1 {
-	font-size: 2em;
-	margin: 0.67em 0
-}
-
-figcaption,figure,main {
-	display: block
-}
-
+.brand .burst {
+	fill: #ffe36b;
+	opacity: 0;
+	transform-box: fill-box;
+	transform-origin: center;
+	transform: translate(var(--tx, 0), var(--ty, 0)) scale(.12);
+	filter: drop-shadow(0 0 3px rgba(255, 210, 55, .5));
+	animation: none;
+	will-change: transform, opacity;
 figure {
 	margin: 1em 40px
-}
-
+.brand:hover .burst,
+.brand:focus-visible .burst {
+	animation: burst-pop 1.2s ease-in-out var(--delay, 0ms) both;
 svg:not(:root) {
 	overflow: hidden
-}
-
-.svg-main,
-#main-art {
-	overflow: visible !important;
+@keyframes burst-pop {
+	0%, 100% {
+		opacity: 0;
+		transform: translate(var(--tx, 0), var(--ty, 0)) scale(.12);
+	}
+	45% {
+		opacity: .8;
+		transform: translate(var(--tx, 0), var(--ty, 0)) scale(.42);
+	}
 	left: 0;
 	width: 100%;
 	max-width: none;
-	transform: translateX(0);
+	.brand:hover .burst,
+	.brand:focus-visible .burst {
+		animation: none;
+		opacity: .65;
+		transform: translate(var(--tx, 0), var(--ty, 0)) scale(.3);
+	}
 }
 
 button,input,optgroup,select,textarea {
