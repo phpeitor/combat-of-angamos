@@ -26,6 +26,53 @@ body {
 	background: #98d8f5
 }
 
+.video-intro {
+	position: fixed;
+	inset: 0;
+	z-index: 2000;
+	display: grid;
+	place-items: center;
+	background: #08101f;
+	opacity: 1;
+	transition: opacity .65s ease, visibility .65s ease;
+}
+
+.video-intro video {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	background: #08101f;
+}
+
+.video-intro__skip {
+	position: absolute;
+	right: clamp(16px, 4vw, 40px);
+	bottom: clamp(16px, 4vw, 40px);
+	padding: 12px 18px;
+	border: 1px solid rgba(255,255,255,.65);
+	border-radius: 999px;
+	color: #fff;
+	background: rgba(8,16,31,.76);
+	font: 600 15px/1.2 sans-serif;
+	cursor: pointer;
+}
+
+.video-intro__skip:hover,
+.video-intro__skip:focus-visible {
+	background: #24365a;
+}
+
+.video-intro--closing {
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.video-intro { transition: none; }
+}
+
 article,aside,footer,header,nav,section {
 	.sparks {
 		position: absolute;

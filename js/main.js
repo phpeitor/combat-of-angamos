@@ -63,6 +63,37 @@ function openImageLightbox(imageSrc, imageAlt, triggerElement) {
 	document.addEventListener("keydown", onKey);
 }
 
+function initVideoIntro() {
+	var intro = document.getElementById("video-intro");
+	var video = document.getElementById("intro-video");
+	var skip = document.getElementById("skip-intro");
+	if (!intro || !video) return;
+
+	var closed = false;
+	var loadTimeout;
+	function closeIntro() {
+		if (closed) return;
+		closed = true;
+		window.clearTimeout(loadTimeout);
+		video.pause();
+		intro.classList.add("video-intro--closing");
+		window.setTimeout(function() { intro.remove(); }, 650);
+	}
+
+	video.addEventListener("ended", closeIntro, { once: true });
+	video.addEventListener("error", closeIntro, { once: true });
+	video.addEventListener("playing", function() { window.clearTimeout(loadTimeout); }, { once: true });
+	if (skip) skip.addEventListener("click", closeIntro, { once: true });
+	if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+		closeIntro();
+		return;
+	}
+
+	loadTimeout = window.setTimeout(closeIntro, 12000);
+	var playback = video.play();
+	if (playback && typeof playback.catch === "function") playback.catch(closeIntro);
+}
+
 function initFeature() {
 	function e() {
 		var e = document.getElementById("gi-body-content");
@@ -359,4 +390,7 @@ function loadFusionApp() {
 }
 
 window.initFeature = initFeature;
-window.addEventListener("DOMContentLoaded", loadFusionApp);
+window.addEventListener("DOMContentLoaded", function() {
+	initVideoIntro();
+	loadFusionApp();
+});
