@@ -866,6 +866,44 @@ footer .gi-footer__copyright abbr {
 	fill: #98d8f5 !important;
 }
 
+#main-art .face-portrait {
+	transform-box: fill-box;
+	transform-origin: 50% 88%;
+	animation: face-bobble 3.8s ease-in-out infinite;
+	will-change: transform;
+}
+
+#main-art .ship-illustration {
+	transform-box: fill-box;
+	transform-origin: 50% 78%;
+	animation: ship-float 5.6s ease-in-out infinite;
+	will-change: transform;
+}
+
+@keyframes face-bobble {
+	0%, 100% { transform: rotate(0deg) translateY(0); }
+	22% { transform: rotate(-1deg) translateY(-1px); }
+	48% { transform: rotate(.7deg) translateY(-2px); }
+	72% { transform: rotate(-.35deg) translateY(-1px); }
+}
+
+@keyframes ship-float {
+	0%, 100% { transform: translateY(0) rotate(0deg); }
+	30% { transform: translateY(-1.5px) rotate(-.25deg); }
+	68% { transform: translateY(1px) rotate(.2deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#main-art .face-portrait {
+		animation: none;
+		will-change: auto;
+	}
+	#main-art .ship-illustration {
+		animation: none;
+		will-change: auto;
+	}
+}
+
 #main-art .ground1,
 #main-art .ground2 {
 	transform-box: fill-box;
