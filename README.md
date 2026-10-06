@@ -8,96 +8,99 @@
 
 ## Descripción
 
-Experiencia web interactiva sobre el Combate de Angamos, construida con HTML, CSS y JavaScript del lado del cliente. La página combina una escena SVG, assets rasterizados, animaciones CSS y plantillas HTML cargadas dinámicamente.
+Landing interactiva conmemorativa del Combate de Angamos. La experiencia combina una ilustración SVG por capas, imágenes PNG, animaciones CSS, una introducción en video y plantillas HTML cargadas en el navegador.
 
-El proyecto no utiliza bundler ni pipeline de compilación. Puede servirse como un sitio estático, pero necesita un servidor HTTP para que `fetch()` cargue correctamente las plantillas.
+El sitio es estático: no requiere backend, gestor de paquetes ni compilación. Sí necesita servirse por HTTP porque carga sus plantillas con `fetch()`.
+
+## Funcionalidades
+
+- Introducción en video desde `resources/ai.mp4`, con opción para saltarla y transición a la escena principal.
+- Ilustración SVG con capas, movimiento parallax y animaciones.
+- Movimiento sutil de la imagen del personaje y del Huáscar.
+- Logo ampliable en un lightbox con soporte de teclado.
+- Respeto por la preferencia del sistema `prefers-reduced-motion`.
 
 ## Requisitos
 
-- Un navegador moderno con soporte para SVG, `fetch()` y CSS moderno.
-- Un servidor HTTP local.
-- Python 3, Apache u otra herramienta equivalente.
+- Navegador moderno con soporte para SVG, CSS, JavaScript y reproducción MP4.
+- Servidor HTTP local o web server, como Apache.
+- Python 3 es opcional para iniciar un servidor local rápido.
 
-No es necesario instalar Node.js ni ejecutar `npm install`.
+No se necesita instalar dependencias ni ejecutar `npm install`.
 
-## Puesta en marcha
+## Ejecución local
 
-Desde la raíz del proyecto, inicia un servidor estático:
+Desde la raíz del repositorio, inicia un servidor estático con Python:
 
-```powershell
+```bash
 python -m http.server 8000
 ```
 
-Abre [http://localhost:8000](http://localhost:8000) en el navegador.
+Abre <http://localhost:8000>. También puedes servir el directorio desde Apache. No abras `index.html` directamente con `file://`, ya que el navegador bloqueará la carga de plantillas.
 
-También puede publicarse directamente bajo Apache. En ese caso, la carpeta del proyecto debe quedar dentro del document root y la aplicación debe abrirse mediante `http://`, no con `file://`.
-
-## Arquitectura
+## Estructura del proyecto
 
 ```text
-index.html                         Punto de entrada y carga de recursos
-css/main.css                       Reset, layout, escena y componentes visuales
-js/main.js                         Montaje de templates e interacciones
-js/click.js                        Librería/soporte de interacción legado
-js/jquery-3.1.1.min.js             Dependencia JavaScript incluida localmente
-js/jquery-migrate-3.0.0.min.js     Compatibilidad para jQuery legado
+index.html                         Entrada de la aplicación y recursos globales
+css/main.css                       Estilos, layout y animaciones
+js/main.js                         Carga de plantillas y comportamiento de la escena
+js/click.js                        Soporte de interacción incluido en el proyecto
+js/jquery-3.1.1.min.js             jQuery, distribución local
+js/jquery-migrate-3.0.0.min.js     Compatibilidad para código jQuery legado
 templates/fusion-app/hero-shell.html
-									Estructura principal de la experiencia
+                                   Estructura de la landing y placeholders
 templates/fusion-app/hero-scene.html
-									Escena SVG y assets visuales
+                                   Ilustración SVG y capas de la escena
 templates/fusion-app/hero-branding.html
-									Logo, título y destellos decorativos
-img/                                Imágenes usadas por la escena y el logo
-ia-context/                         Reglas de colaboración y frontend
+                                   Logo, título y elementos decorativos
+img/                               Logo y PNG del personaje y el Huáscar
+resources/ai.mp4                   Video de introducción
+.ia-context/                       Guías de contexto para herramientas de IA
 ```
 
-### Flujo de carga
+## Arquitectura y flujo de carga
 
-1. `index.html` crea el contenedor `#fusion-app` y carga los scripts.
-2. `loadFusionApp()` solicita `hero-shell.html` mediante `fetch()`.
-3. `mountHeroPartials()` reemplaza los placeholders `data-partial` por sus templates.
-4. `initFeature()` conecta parallax, navegación y la interacción del logo.
-5. El logo abre un lightbox accesible mediante clic, teclado o `Escape` para cerrar.
+1. `index.html` muestra la introducción en video y crea el contenedor `#fusion-app`.
+2. `js/main.js` carga `hero-shell.html` mediante `fetch()`.
+3. `mountHeroPartials()` reemplaza los nodos `data-partial` por las plantillas de escena y branding.
+4. `initFeature()` inicializa animaciones, parallax e interacciones cuando las plantillas están montadas.
+5. Al terminar el video (o al saltarlo), la landing queda visible con la escena SVG.
 
-Los templates usan rutas relativas a la raíz del sitio, por lo que la aplicación debe servirse desde una ubicación coherente con `index.html`.
+Las rutas de recursos y plantillas son relativas a la raíz del sitio. Publica el proyecto manteniendo la estructura de directorios y sirve `index.html` desde esa raíz.
 
-## Estructura de la escena
+## Desarrollo y validación
 
-La ilustración principal vive en `hero-scene.html` como un SVG con capas identificadas por clases (`level1`, `level2`, `level3`, `level4`). `main.js` puede modificar el `viewBox` para pantallas pequeñas y aplicar el movimiento parallax sobre los elementos con `data-depth`.
+1. Inicia el servidor desde la raíz del proyecto.
+2. Modifica el template, estilo o script responsable de la parte que estás cambiando.
+3. Recarga sin caché si cambias archivos CSS o JavaScript; `index.html` versiona esos recursos mediante query strings.
+4. Revisa la consola y la pestaña Network del navegador para detectar errores de carga.
 
-El branding se mantiene separado en `hero-branding.html`. El CSS controla el tamaño del logo, los destellos minimalistas y el lightbox sin requerir componentes externos.
+Comprobación de sintaxis JavaScript:
 
-## Desarrollo
-
-Para trabajar localmente:
-
-1. Sirve el directorio raíz con un servidor HTTP.
-2. Edita el template o asset correspondiente.
-3. Recarga el navegador con la caché deshabilitada si modificas CSS o JavaScript.
-4. Revisa la consola del navegador cuando falle la carga de un parcial.
-
-Comprobaciones rápidas:
-
-```powershell
-node --check .\js\main.js
+```bash
+node --check js/main.js
 ```
 
-En el navegador, confirma que las solicitudes a `templates/fusion-app/` y `img/` devuelvan estado HTTP `200`.
+Comprobación de formato del diff:
 
-## Convenciones de mantenimiento
+```bash
+git diff --check
+```
 
-- Mantener la carga de templates compatible con servidores estáticos.
-- Preferir cambios acotados a la capa responsable: template, CSS o interacción.
-- No introducir rutas absolutas dependientes de una máquina local.
-- Mantener atributos `alt`, roles y controles de teclado en interacciones visuales.
-- Evitar añadir dependencias o un sistema de build sin justificar el coste operativo.
-- Actualizar el parámetro de versión de `main.css` o de los scripts cuando sea necesario invalidar caché en despliegues estáticos.
+## Mantenimiento
+
+- Conserva la carga de plantillas compatible con un servidor estático.
+- Mantén los recursos organizados por responsabilidad: HTML en `templates/`, estilos en `css/`, lógica en `js/` y medios en `img/` o `resources/`.
+- Usa rutas relativas y evita referencias dependientes de una máquina local.
+- Mantén textos alternativos, controles de teclado y soporte de movimiento reducido en interacciones y animaciones.
+- Evita dependencias o herramientas de build mientras no aporten una necesidad concreta.
+- Actualiza el parámetro de versión de CSS o JavaScript cuando un despliegue estático necesite invalidar caché.
 
 ## Solución de problemas
 
-### La página muestra un bloque de fallback
+### La escena muestra un fallback o queda incompleta
 
-Comprueba que el servidor se inició desde la raíz del proyecto y que estas rutas responden correctamente:
+Confirma que el servidor se ejecuta desde la raíz y que las plantillas responden correctamente:
 
 ```text
 /templates/fusion-app/hero-shell.html
@@ -105,10 +108,10 @@ Comprueba que el servidor se inició desde la raíz del proyecto y que estas rut
 /templates/fusion-app/hero-branding.html
 ```
 
-### La escena o el logo aparecen sin estilos
+### El video no se reproduce
 
-Verifica la carga de `css/main.css`, limpia la caché del navegador y confirma que no haya errores de sintaxis en la consola.
+La reproducción automática requiere que el video esté silenciado. Si el formato o el navegador impiden reproducirlo, la introducción se cierra y se muestra la escena; también puedes usar **Saltar introducción**.
 
-### El logo no abre el lightbox
+### Los estilos o cambios recientes no aparecen
 
-Confirma que `main.js` se cargue después de jQuery y que el template de branding se haya montado antes de ejecutar `initFeature()`.
+Verifica que `css/main.css` responda con HTTP 200 y recarga sin caché. Comprueba también la consola por errores de CSS o SVG.
