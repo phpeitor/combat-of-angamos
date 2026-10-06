@@ -876,7 +876,7 @@ footer .gi-footer__copyright abbr {
 #main-art .ship-illustration {
 	transform-box: fill-box;
 	transform-origin: 50% 78%;
-	animation: ship-float 5.6s ease-in-out infinite;
+	animation: ship-float 4.8s ease-in-out infinite;
 	will-change: transform;
 }
 
@@ -889,8 +889,9 @@ footer .gi-footer__copyright abbr {
 
 @keyframes ship-float {
 	0%, 100% { transform: translateY(0) rotate(0deg); }
-	30% { transform: translateY(-1.5px) rotate(-.25deg); }
-	68% { transform: translateY(1px) rotate(.2deg); }
+	25% { transform: translateY(-5px) rotate(-.7deg); }
+	50% { transform: translateY(0) rotate(0deg); }
+	75% { transform: translateY(4px) rotate(.55deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
